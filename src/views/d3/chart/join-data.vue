@@ -8,12 +8,6 @@ onMounted(()=>{
     g = svg.append('g').attr('class','ggroup')
     addAndUpdate(g.selectAll('rect'))
 })
-function update(){
-  var p = d3.select("body")
-    .selectAll("p")
-    .data([4, 8, 15, 16, 23, 42])
-    .text(function(d) { return d; });   
-}
 
 function add(){
   arr.value=[...arr.value,arr.value.length]
@@ -34,6 +28,7 @@ function addAndUpdate() {
     })
     .attr('height',  100+'px')
     .attr('fill', 'green')
+    console.log({rect})
    updateText();
 }
 function updateText(rect){
@@ -69,9 +64,10 @@ function updateText(rect){
 
     text.exit().remove();
 }
+
 function minAndUpdate(react){
   min()
-  g.selectAll('rect')
+  let rect=g.selectAll('rect')
     .data(arr.value)
     .exit()
     .remove()
@@ -86,14 +82,13 @@ function min(){
 
 <template>
   <div class="bg-gray-50">
-    柱状图{{arr}} 
+    数据：{{arr}} 
     <div>
       <div>数据
           <button @click="add">增加</button>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <button @click="min">删除</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <button @click="update">更新</button>
+    
       </div>
       <div>视图
           <button @click="addAndUpdate">增加</button>
